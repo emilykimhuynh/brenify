@@ -1,0 +1,22 @@
+{
+"manifest_version": 2,
+    "name": "Brenify",
+    "description": "Replaces all instances of 'Ben' with 'Bren'",
+    "version": "0.1",
+    "browser_action": {
+        "default_icon": "bren_icon.png"
+    },
+
+    "content_scripts": [
+        {
+
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}
