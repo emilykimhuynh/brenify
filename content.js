@@ -21,7 +21,11 @@ for (var i = 0; i < elements.length; i++) {
             // TODO: Replace Ben with image
             // TODO: Only match the word Ben, not any sequence of characters 'B' 'e' 'n'
             var replacedText = text.replace(/Ben/g, 'Bren');
+            if (replacedText !== text) {
+                element.replaceChild(document.createTextNode(replacedText), node);
+            }
 
+            replacedText = text.replace(/ben/g, 'bren');
             if (replacedText !== text) {
                 element.replaceChild(document.createTextNode(replacedText), node);
             }
