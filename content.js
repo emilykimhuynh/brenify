@@ -16,19 +16,20 @@ for (var i = 0; i < elements.length; i++) {
 
         //if the nodeType is a text node
         if (node.nodeType === 3) {
-            var text = node.nodeValue;
-            
-            // TODO: Replace Ben with image
-            // TODO: Only match the word Ben, not any sequence of characters 'B' 'e' 'n'
-            var replacedText = text.replace(/Ben/g, 'Bren');
-            if (replacedText !== text) {
-                element.replaceChild(document.createTextNode(replacedText), node);
-            }
-
-            replacedText = text.replace(/ben/g, 'bren');
-            if (replacedText !== text) {
-                element.replaceChild(document.createTextNode(replacedText), node);
-            }
+            brenify(node.nodeValue);
         }
+    }
+}
+
+function brenify(text) {
+    // TODO: Replace standalone 'Ben' and 'ben' with image
+    var replacedText = text.replace(/Ben/g, 'Bren');
+    if (replacedText !== text) {
+        element.replaceChild(document.createTextNode(replacedText), node);
+    }
+
+    replacedText = text.replace(/ben/g, 'bren');
+    if (replacedText !== text) {
+        element.replaceChild(document.createTextNode(replacedText), node);
     }
 }
