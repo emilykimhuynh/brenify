@@ -37,6 +37,13 @@
       "Ɲ","ƞ","Ǹ","ǹ",
       "ȵ"
     ];
+    // these are the "short list" of b's, e's, n's
+    // that survive the "first pass" for esoteric b's, e's, n's.
+    // also: should we switch to .split("") to
+    //    represent all B's, E's, and N's on one line?
+    const probable_bs = "Bb".split("")
+    const probable_es = "Ee".split("")
+    const probable_ns = "Nn".split("")
 
     //idea: put each letter in a capturing group and insert an r between them
     var benExpression = (b,e,n) => new RegExp(`(${b})(${e})(${n})`,"g");
@@ -80,19 +87,47 @@
         return expressionStr;
     };
 
+    /*
+        Helper functions
+    */
+
+    //http://stackoverflow.com/questions/1187518/javascript-array-difference
+    //don't want to import JQuery or Underscore or anything just yet
+    var difference = (a1, a2) => {
+        var result = [];
+        for (var i = 0; i < a1.length; i++) {
+            if (a2.indexOf(a1[i]) === -1) {
+                result.push(a1[i]);
+            }
+        }
+        return result;
+    }
+
+    /* Main function */
 
     var brenify = () => {
         let newHTML = document.body.innerHTML; //use temp variable so we can make DOM updates all at once
         /* TODO: build a single complex regexp and only search through HTML once for effeciency */
-        for(let b of bs) {
-            for(let e of es) {
-                for(let n of ns) {
+
+        //first pass - prioritize probable b's, e's, and n's and flush to the DOM
+        for(let b of probable_bs) {
+            for(let e of probable_es) {
+                for(let n of probable_ns) {
                     newHTML = newHTML.replace(benExpression(b,e,n),brenReplacementString(b,e,n));
                 }
             }
         }
         document.body.innerHTML = newHTML;
-    }
+        //now handle all the special characters
+        for(let b of difference(bs,probable_bs)) {
+            for(let e of difference(es,probable_es)) {
+                for(let n of difference(ns,probable_ns)) {
+                    newHTML = newHTML.replace(benExpression(b,e,n),brenReplacementString(b,e,n));
+                }
+            }
+        }
+        document.body.innerHTML = newHTML;
+    };
 
     brenify();
 })();

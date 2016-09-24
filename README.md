@@ -2,6 +2,7 @@
 
 ###Changes:
 
+* *Version 0.4.1:* Small optimization to narrow search space on most pages
 * *Version 0.4:* Support a wider variety of Unicode
 * *Version 0.3.1:* Removed async replace loop since it was breaking data loading
 * *Version 0.3:* Handles async loading data for first 10 seconds (don't feel like having an eternal loop)
