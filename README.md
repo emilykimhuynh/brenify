@@ -2,6 +2,7 @@
 
 ###Changes:
 
+* *Version 0.4:* Support a wider variety of Unicode and avoid polluting global namespace.
 * *Version 0.3.1:* Removed async replace loop since it was breaking data loading
 * *Version 0.3:* Handles async loading data for first 10 seconds (don't feel like having an eternal loop)
 * *Version 0.2:* Handles lower case "ben"
@@ -11,3 +12,4 @@
 
 - option for brenmoji replacement
 - handle async data loading
+- additional Unicode support
